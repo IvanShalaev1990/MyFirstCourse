@@ -9,13 +9,13 @@ public class OddArrayTest {
         OddArray oddArray = new OddArray();
 
         Random random = new Random();
-
+        ArrayList<Integer> newList = new ArrayList<>();
         ArrayList<Integer> myList = new ArrayList<>();
         for (int i = 0; i < random.nextInt(50,100); i++) {
-            myList.add(random.nextInt(100));
+            myList.add(random.nextInt(1,100));
         }
         System.out.println(myList);
-        System.out.println(oddArray.oddArrayRemove(myList));
+        System.out.println(oddArray.oddArrayRemove(myList, newList));
 
     }
 }

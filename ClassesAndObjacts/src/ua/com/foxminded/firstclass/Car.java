@@ -2,20 +2,22 @@ package ua.com.foxminded.firstclass;
 
 import java.util.Objects;
 
-public class Car {
+public class Car{
     String name;
     int yearOfProduction;
     int price;
     int weight;
     Color color;
-    String enginType;
+    EnginType enginType;
     int mileage;
     boolean isReadyToDrive;
+    int mileageSinceLastService;
+    boolean needService;
 
     public Car() {
     }
 
-    public Car(String name, int yearOfProduction, int price, int weight, Color color, String enginType, int mileage, boolean isReadyToDrive) {
+    public Car(String name, int yearOfProduction, int price, int weight, Color color, EnginType enginType, int mileage, boolean isReadyToDrive, int mileageSinceLastService, boolean needService) {
         this.name = name;
         this.yearOfProduction = yearOfProduction;
         this.price = price;
@@ -24,15 +26,53 @@ public class Car {
         this.enginType = enginType;
         this.mileage =mileage;
         this.isReadyToDrive = isReadyToDrive;
+        this.mileageSinceLastService = mileageSinceLastService;
+        this.needService = needService;
+    }
+    public boolean needService(){
+        if (mileageSinceLastService < 0){
+            throw new IllegalArgumentException("mileageSinceLastService can't be negative");
+        }
+        if (mileageSinceLastService > 10000){
+            System.out.println("You should bo on service " + (mileageSinceLastService-10000) + " mile ago");
+            return needService = true;
+        }else {
+            return needService = false;
+        }
+    }
+    public boolean service(){
+        if (needService == true){
+            System.out.println("Service was made");
+        }else {
+            System.out.println("You don't need service");
+        }
+        return needService = false;
+    }
+    public void mileageSinceLastService(int mileage){
+        if(mileage < 0){
+            throw new IllegalArgumentException("MileageSinceLastService");
+        }
+        mileageSinceLastService += mileage;
+    }
+    public void mileageSinceLastService(double mileage){
+        if(mileage < 0){
+            throw new IllegalArgumentException("MileageSinceLastService");
+        }
+        mileageSinceLastService += Math.round(mileage);
     }
     public void mileageIncrease(int mileage){
         if(mileage < 0){
             throw new IllegalArgumentException("Mileage can't be negative");
         }
         this.mileage += mileage;
+        mileageSinceLastService(mileage);
     }
     public void mileageIncrease(double mileage){
-        this.mileage += mileage;
+        if(mileage < 0){
+            throw new IllegalArgumentException("Mileage can't be negative");
+        }
+        this.mileage +=Math.round(mileage);
+        mileageSinceLastService(mileage);
     }
     public boolean destroyTheEngin(){
         if (mileage < 250000){
@@ -51,6 +91,7 @@ public class Car {
     public Color paint(){
         return color = Color.GREEN;
     }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -58,9 +99,11 @@ public class Car {
                 ", yearOfProduction=" + yearOfProduction +
                 ", price=" + price +
                 ", weight=" + weight +
-                ", color='" + color.getColor() + '\'' +
-                ", enginType='" + enginType + '\'' +
+                ", color=" + color +
+                ", enginType=" + enginType +
+                ", mileage=" + mileage +
                 ", isReadyToDrive=" + isReadyToDrive +
+                ", mileageSinceLastService=" + mileageSinceLastService +
                 '}';
     }
 

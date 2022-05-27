@@ -10,7 +10,7 @@ public class Motorcycle {
     int price;
    int weight;
     Color color;
-    String enginType;
+    EnginType enginType;
     int mileage;
     boolean isReadyToDrive;
     public  Motorcycle(){
@@ -18,7 +18,7 @@ public class Motorcycle {
     }
     public Motorcycle(String name, int yearOfProduction,
                       int price, int weight, Color color,
-                      String enginType, int mileage,
+                      EnginType enginType, int mileage,
                       boolean isReadyToDrive){
         this.name = name;
         this.yearOfProduction = yearOfProduction;
@@ -64,12 +64,11 @@ public class Motorcycle {
                 ", price=" + price +
                 ", weight=" + weight +
                 ", color=" + color +
-                ", enginType='" + enginType + '\'' +
+                ", enginType=" + enginType +
                 ", mileage=" + mileage +
                 ", isReadyToDrive=" + isReadyToDrive +
                 '}';
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

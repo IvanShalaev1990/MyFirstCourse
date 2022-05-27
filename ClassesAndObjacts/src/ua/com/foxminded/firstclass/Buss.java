@@ -12,8 +12,35 @@ public class Buss extends Car{
         }
         if (mileageSinceLastService > 50000){
             System.out.println("You should bo on service " + (mileageSinceLastService-50000) + " mile ago");
-            return true;
+            return needService = true;
         }
-        return false;
+        return needService = false;
+    }
+
+    @Override
+    public boolean service() {
+        if (needService == true){
+            System.out.println("Service was done");
+            return needService = false;
+        }
+        System.out.println("You have " + (50000 - mileageSinceLastService) + " until next service");
+        return needService = false;
+    }
+
+    @Override
+    public void mileageIncrease(int mileage) {
+        if(mileage < 0){
+            throw new IllegalArgumentException("MileageSinceLastService");
+        }
+        this.mileage +=mileage;
+        mileageSinceLastService(mileage);
+    }
+
+    @Override
+    public void mileageSinceLastService(int mileage) {
+            if(mileage < 0){
+                throw new IllegalArgumentException("MileageSinceLastService");
+            }
+            mileageSinceLastService += mileage;
     }
 }
